@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: ../../frontend
+      dockerfile: ./Dockerfile
+    container_name: ng-hello-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - ng-hello
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/
+      - ./letsencrypt/:/var/www/letsencrypt/
+
+networks:
+  ng-hello:
+    driver: bridge
